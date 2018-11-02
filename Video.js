@@ -264,7 +264,7 @@ export default class Video extends Component {
         right: 0,
         bottom: 0,
 		width:this.props.posterWidth,
-		height:this.props.posterHeight
+		height:this.props.posterHeight,
         resizeMode: this.props.posterResizeMode || 'contain'
       };
 
