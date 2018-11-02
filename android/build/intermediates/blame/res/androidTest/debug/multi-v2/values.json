@@ -1,0 +1,12 @@
+{
+    "logs": [
+        {
+            "outputFile": "E:\\Software\\Develop\\Git\\chengke-app\\node_modules\\react-native-video\\android\\build\\intermediates\\res\\merged\\androidTest\\debug\\values\\values.xml",
+            "map": []
+        },
+        {
+            "outputFile": "E:\\Software\\Develop\\Git\\chengke-app\\node_modules\\react-native-video\\android\\build\\intermediates\\incremental\\mergeDebugAndroidTestResources\\merged.dir\\values\\values.xml",
+            "map": []
+        }
+    ]
+}
