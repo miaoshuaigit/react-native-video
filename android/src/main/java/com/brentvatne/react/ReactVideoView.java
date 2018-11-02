@@ -344,9 +344,10 @@ public class ReactVideoView extends ScalableVideoView implements MediaPlayer.OnP
         Bitmap bitmap = ImageUtil.createVideoThumbnail(mSrcUriString, MediaStore.Images.Thumbnails.MINI_KIND);
         if(null != bitmap){
             // 转换base64
-            String base64 = ImageUtil.convert(bitmap);
+            /*String base64 = ImageUtil.convert(bitmap);*/
+            String path = ImageUtil.saveBitmap(this.getContext(),bitmap);
             WritableMap posterEvent = Arguments.createMap();
-            posterEvent.putString("uri",base64);
+            posterEvent.putString("uri","file://"+path);
             mEventEmitter.receiveEvent(getId(),Events.EVENT_POSTER_CHANGE.toString(),posterEvent);
         }
     }

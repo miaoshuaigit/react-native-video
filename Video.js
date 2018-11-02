@@ -182,7 +182,7 @@ export default class Video extends Component {
 
   _onPosterChange = (event) => {
 	this.setState({
-		poster:"data:image/png;base64,"+event.nativeEvent.uri
+		poster:event.nativeEvent.uri
 	});
   }
 

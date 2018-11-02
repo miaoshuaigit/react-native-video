@@ -1,5 +1,6 @@
 package com.brentvatne.utils;
 
+import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.media.MediaMetadataRetriever;
@@ -8,7 +9,11 @@ import android.provider.MediaStore;
 import android.util.Base64;
 
 import java.io.ByteArrayOutputStream;
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
 import java.util.Hashtable;
+import java.util.UUID;
 
 /**
  * Created by miaoshuai on 2018/11/2.
@@ -87,8 +92,7 @@ public class ImageUtil {
         return bitmap;
     }
 
-    public static Bitmap convert(String base64Str) throws IllegalArgumentException
-    {
+    public static Bitmap convert(String base64Str) throws IllegalArgumentException{
         byte[] decodedBytes = Base64.decode(
                 base64Str.substring(base64Str.indexOf(",")  + 1),
                 Base64.DEFAULT
@@ -97,10 +101,29 @@ public class ImageUtil {
         return BitmapFactory.decodeByteArray(decodedBytes, 0, decodedBytes.length);
     }
 
-    public static String convert(Bitmap bitmap)
-    {
+    public static String convert(Bitmap bitmap){
         ByteArrayOutputStream outputStream = new ByteArrayOutputStream();
         bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
-        return Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
+        return "data:image/png;base64," + Base64.encodeToString(outputStream.toByteArray(), Base64.DEFAULT);
+    }
+
+    /**
+     * 保存bitmap
+     * @param bitmap
+     */
+    public static String saveBitmap(Context context,Bitmap bitmap){
+        String path = null;
+        try {
+            File fileDir = context.getExternalFilesDir(null);
+            fileDir.mkdirs();
+            File file = new File(fileDir, UUID.randomUUID()+".png");
+            FileOutputStream outputStream = new FileOutputStream(file);
+            bitmap.compress(Bitmap.CompressFormat.PNG, 100, outputStream);
+            outputStream.close();
+            path = file.getPath();
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+        return path;
     }
 }
